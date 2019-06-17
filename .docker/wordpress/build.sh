@@ -1,0 +1,1 @@
+docker build -t wordpress:7.3-fpm-sysv "$(dirname $0)"

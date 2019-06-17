@@ -1,0 +1,1 @@
+docker build -t wordpress-dec:7.3-apache-sysv "$(dirname $0)"

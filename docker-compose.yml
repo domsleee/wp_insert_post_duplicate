@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  wordpress:
+    working_dir: /var/www/html
+    image: wordpress-dec:7.3-apache-sysv
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    volumes:
+      - ./script.sh:/var/www/html/script.sh
+      - ./my_plugin:/var/www/html/wp-content/plugins/my_plugin
+
+  db:
+    image: mysql:5.7
+    restart: always
+    command: ['--wait-timeout=300']
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
